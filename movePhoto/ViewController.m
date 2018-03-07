@@ -59,6 +59,10 @@
     if(([coordinate isEqualToString:@"x"]||[coordinate isEqualToString:@"y"])&&(value)&&([direction isEqualToString:@"+"]||[direction isEqualToString:@"-"]))
     {
         CGRect tempRect = self.image.frame;
+        //开启动画
+        [UIView beginAnimations:nil context:nil];
+        //设置动画时长
+        [UIView setAnimationDuration:0.5];
         if([coordinate isEqualToString:@"x"])
         {
             if([direction isEqualToString:@"+"])
@@ -87,7 +91,8 @@
             
         }
         self.image.frame =  tempRect;
-        
+        //提交动画
+        [UIView commitAnimations];
     }
     else
     {
