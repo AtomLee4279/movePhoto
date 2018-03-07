@@ -58,7 +58,10 @@
 {
     if(([coordinate isEqualToString:@"x"]||[coordinate isEqualToString:@"y"])&&(value)&&([direction isEqualToString:@"+"]||[direction isEqualToString:@"-"]))
     {
-        CGRect tempRect = self.image.frame;
+        
+        CGRect tempRect = self.image.frame;//frame是控件所在的矩形框相对于父控件而言的相对位置和大小；以父控件左上角做为坐标原点
+        //改用center属性来修改后续图片的位置；center控制控件中心的位置，以父控件左上角为坐标原点
+        CGPoint tempPoint = self.image.center;
         //开启动画
         [UIView beginAnimations:nil context:nil];
         //设置动画时长
@@ -67,30 +70,33 @@
         {
             if([direction isEqualToString:@"+"])
             {
-                tempRect.origin.x+=[value integerValue];
-                
+                //tempRect.origin.x+=[value integerValue];//改用了center属性修改位置后，center并没有orgin成员变量，需要注释掉
+                tempPoint.x +=[value integerValue];//用center成员属性修改图片位置
             }
             else if ([direction isEqualToString:@"-"])
             {
-                tempRect.origin.x-=[value intValue];
-              
+                //tempRect.origin.x-=[value intValue];//改用了center属性修改位置后，center并没有orgin成员变量，需要注释掉
+               tempPoint.x -=[value integerValue];//用center成员属性修改图片位置
             }
             
         }
         if([coordinate isEqualToString:@"y"])
         {
+            //注意“+”是向下移动，y轴坐标向下加大
             if([direction isEqualToString:@"+"])
             {
-
-                tempRect.origin.y+=[value integerValue];
+                //tempRect.origin.y+=[value integerValue];//改用了center属性修改位置后，center并没有orgin成员变量，需要注释掉
+                tempPoint.y +=[value integerValue];//用center成员属性修改图片位置
             }
             else if ([direction isEqualToString:@"-"])
             {
-                tempRect.origin.y-=[value intValue];
+                //tempRect.origin.y-=[value intValue];//改用了center属性修改位置后，center并没有orgin成员变量，需要注释掉
+                tempPoint.y -=[value integerValue];//用center成员属性修改图片位置
             }
             
         }
-        self.image.frame =  tempRect;
+        //self.image.frame =  tempRect;
+        self.image.center = tempPoint;
         //提交动画
         [UIView commitAnimations];
     }
@@ -106,7 +112,9 @@
 {
     if(value&&type)
     {
-        CGRect tempRect = self.image.frame;
+        //CGRect tempRect = self.image.frame;
+        //改用bounds属性来修改后续的图片尺寸；bouns一般控制控件所在的矩形框的位置和大小；并不相对于父控件而言。如此可确保放大/缩小后控件中心点不变
+        CGRect tempRect = self.image.bounds;
         if([type isEqualToString:@"+"])
         {
             
@@ -119,7 +127,8 @@
             tempRect.size.width = tempRect.size.width-[value integerValue];
             tempRect.size.height = tempRect.size.height-[value integerValue];
         }
-        self.image.frame =  tempRect;
+        //self.image.frame =  tempRect;//改用bounds修改图片尺寸后，需注释掉
+        self.image.bounds = tempRect;
     }
 }
 
