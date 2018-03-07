@@ -58,19 +58,18 @@
 {
     if(([coordinate isEqualToString:@"x"]||[coordinate isEqualToString:@"y"])&&(value)&&([direction isEqualToString:@"+"]||[direction isEqualToString:@"-"]))
     {
+        CGRect tempRect = self.image.frame;
         if([coordinate isEqualToString:@"x"])
         {
             if([direction isEqualToString:@"+"])
             {
-                CGRect tempRect = self.image.frame;
                 tempRect.origin.x+=[value integerValue];
-                self.image.frame =  tempRect;
+                
             }
             else if ([direction isEqualToString:@"-"])
             {
-                CGRect tempRect = self.image.frame;
                 tempRect.origin.x-=[value intValue];
-                self.image.frame =  tempRect;
+              
             }
             
         }
@@ -78,18 +77,16 @@
         {
             if([direction isEqualToString:@"+"])
             {
-                CGRect tempRect = self.image.frame;
+
                 tempRect.origin.y+=[value integerValue];
-                self.image.frame =  tempRect;
             }
             else if ([direction isEqualToString:@"-"])
             {
-                CGRect tempRect = self.image.frame;
                 tempRect.origin.y-=[value intValue];
-                self.image.frame =  tempRect;
             }
             
         }
+        self.image.frame =  tempRect;
         
     }
     else
