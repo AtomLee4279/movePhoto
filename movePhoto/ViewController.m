@@ -62,6 +62,7 @@
         CGRect tempRect = self.image.frame;//frame是控件所在的矩形框相对于父控件而言的相对位置和大小；以父控件左上角做为坐标原点
         //改用center属性来修改后续图片的位置；center控制控件中心的位置，以父控件左上角为坐标原点
         CGPoint tempPoint = self.image.center;
+        //头尾式动画：1.开启动画；2.设置动画时长（可选）3.提交动画
         //开启动画
         [UIView beginAnimations:nil context:nil];
         //设置动画时长
